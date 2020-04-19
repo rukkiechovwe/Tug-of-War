@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>project</title>
+</head>
+<body>
+	<form>
+	<h1>Lets play a game!</h1>
+	<h3 id="team1">team1</h3>
+	<p id="t1p1">player 1</p>
+	<p>weight:<input type="number" name="text" placeholder="enter your weight" id="weight1"></p>
+	<p id="t1p2">player 2</p>
+	<p>weight:<input type="number" name="text" placeholder="enter your weight" id="weight2"></p>
+
+	<h3 id="team2">team2</h3>
+	<p id="t2p1">player 1</p>
+	<p>weight:<input type="number" name="text" placeholder="enter your weight" id="weight3"></p>
+	<p id="t2p2">player 2</p>
+	<p>weight:<input type="number" name="text" placeholder="enter your weight" id="weight4"></p>
+	
+	
+	</form>
+	<button id="submit">submit</button>
+	<p id="team1weight"></p>
+	<p id="team2weight"></p>
+	<p id="result"></p>
+
+
+	<script type="text/javascript">
+		var submitButton = document.getElementById('submit')
+		submitButton.addEventListener('click', function(){
+			var team1 = document.getElementById('team1').innerHTML
+			var team2 = document.getElementById('team2').innerHTML
+			var weight1 = document.getElementById('weight1').value
+			var weight2 = document.getElementById('weight2').value
+			var weight3 = document.getElementById('weight3').value
+			var weight4 = document.getElementById('weight4').value
+			
+			var teams = [
+			{
+				'name':team1, 
+				'players': [{'name':'player1', 'weight': Number(weight1)},
+							{'name':'player2', 'weight': Number(weight2)}]
+			},
+			{
+				'name':team2,
+				'players': [{'name':'player1', 'weight': Number(weight3)},
+							{'name':'player2', 'weight': Number(weight4)}]
+			}
+		] 
+		let myArray = []
+		for (let i = 0; i < teams.length; i++) {
+			teams[i]
+			for (let a = 0; a < teams[i].players.length; a++) {
+				teams[i].players[a]
+				let li = myArray.filter(el => el.name == teams[i].name)
+				if (li.length == 0) {
+					dict = {'name':teams[i].name, 'weight':teams[i].players[a].weight}
+					myArray.push(dict)
+				}
+				else{
+					li[0].weight += teams[i].players[a].weight
+				}
+			}
+		}
+		document.getElementById('team1weight').innerHTML =  'Total weight of team1:' +' '+ myArray[0].weight 
+		document.getElementById('team2weight').innerHTML =  'Total weight of team2:' +' '+ myArray[1].weight 
+		 myArray.sort = myArray.sort((a,b) => parseFloat(b.weight) - parseFloat(a.weight)) 
+		 document.getElementById('result').innerHTML = myArray[0].name +' '+ 'has an advantage'
+		})
+	</script>
+</body>
+</html>
